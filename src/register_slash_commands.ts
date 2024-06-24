@@ -1,13 +1,12 @@
-import { REST, Routes } from 'discord.js';
+import { REST, Routes, SlashCommandBuilder } from 'discord.js';
+import loadedCommands from './load_commands';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const commands = [
-  {
-    name: 'ping',
-    description: 'Replies with Pong!',
-  },
-];
+const commands: SlashCommandBuilder[] = [];
+for (const commandName in loadedCommands) {
+  commands.push(loadedCommands[commandName].data);
+}
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN!);
 
