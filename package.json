@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node ./src/app.ts",
     "build": "tsc",
-    "start": "node ./dist/app.js"
+    "start": "node ./dist/app.js",
+    "register": "ts-node ./src/register_slash_commands.ts"
   },
   "dependencies": {
     "discord.js": "^14.15.3",
