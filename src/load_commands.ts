@@ -4,7 +4,7 @@ import path from 'path';
 
 type Command = {
   data: SlashCommandBuilder;
-  excute: (interaction: CommandInteraction, client: Client) => void;
+  excute: (interaction: CommandInteraction, client: Client) => Promise<void>;
 };
 
 console.log('Loading commands...');

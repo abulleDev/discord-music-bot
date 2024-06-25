@@ -5,7 +5,7 @@ export default {
     .setName('ping')
     .setDescription('Replies with Pong!'),
 
-  excute(interaction: CommandInteraction, client: Client) {
-    interaction.reply('Pong!');
+  async excute(interaction: CommandInteraction, client: Client) {
+    await interaction.reply('Pong!');
   },
 };

@@ -14,7 +14,7 @@ client.on('ready', () => {
 client.on('interactionCreate', async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
-  loadedCommands[interaction.commandName].excute(interaction, client);
+  await loadedCommands[interaction.commandName].excute(interaction, client);
 });
 
 client.login(process.env.TOKEN);
