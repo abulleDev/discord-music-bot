@@ -6,6 +6,7 @@ interface Info {
   webpage_url: string;
   uploader_url: string | undefined;
   thumbnail: string | undefined;
+  extractor: string;
 }
 
 export default function getInfo(url: string): Promise<Info> {

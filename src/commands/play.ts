@@ -9,6 +9,22 @@ import joinVoice from '../voice/join_voice';
 import { musicManagers } from '../app';
 import getInfo from '../music/get_info';
 
+const embedColor: { [key: string]: number } = {
+  youtube: 0xff0000,
+  soundcloud: 0xff5500,
+  'chzzk:video': 0x00ffa3,
+  'chzzk:live': 0x00ffa3,
+  'twitch:stream': 0x9146ff,
+  'twitch:clips': 0x9146ff,
+  'twitch:vod': 0x9146ff,
+  Instagram: 0xff0069,
+  'instagram:story': 0xff0069,
+  Naver: 0x03c75a,
+  'Naver:live': 0x03c75a,
+  navernow: 0x03c75a,
+  vimeo: 0x17d5ff,
+};
+
 export default {
   data: new SlashCommandBuilder()
     .setName('play')
@@ -52,8 +68,14 @@ export default {
 
     const url = interaction.options.get('url')!.value as string;
     try {
-      const { title, uploader, webpage_url, uploader_url, thumbnail } =
-        await getInfo(url);
+      const {
+        title,
+        uploader,
+        webpage_url,
+        uploader_url,
+        thumbnail,
+        extractor,
+      } = await getInfo(url);
 
       const author =
         uploader === undefined
@@ -63,7 +85,7 @@ export default {
               url: uploader_url,
             };
       const embed = new EmbedBuilder()
-        .setColor(0xd1d1d1)
+        .setColor(embedColor[extractor] ?? 0xd1d1d1)
         .setTitle(title)
         .setAuthor(author)
         .setDescription(webpage_url)
