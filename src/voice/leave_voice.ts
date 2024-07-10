@@ -1,5 +1,5 @@
 import { VoiceConnection } from '@discordjs/voice';
-import { musicManagers } from '../app';
+import { musicManagers } from '../music/music_manager';
 
 export default function leaveVoice(guildId: string, connection: VoiceConnection) {
   connection.destroy();

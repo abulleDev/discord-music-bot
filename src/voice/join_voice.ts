@@ -1,7 +1,6 @@
 import { joinVoiceChannel } from '@discordjs/voice';
 import { VoiceBasedChannel } from 'discord.js';
-import { musicManagers } from '../app';
-import MusicManager from '../music/music_manager';
+import MusicManager, { musicManagers } from '../music/music_manager';
 
 export default function joinVoice(voiceChannel: VoiceBasedChannel) {
   const connection = joinVoiceChannel({

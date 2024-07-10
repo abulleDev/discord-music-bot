@@ -6,7 +6,7 @@ import {
   SlashCommandBuilder,
 } from 'discord.js';
 import joinVoice from '../voice/join_voice';
-import { musicManagers } from '../app';
+import { musicManagers } from '../music/music_manager';
 import getInfo from '../music/get_info';
 
 const embedColor: { [key: string]: number } = {

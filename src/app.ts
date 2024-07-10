@@ -2,7 +2,6 @@ import { Client, GatewayIntentBits } from 'discord.js';
 import loadedCommands from './load_commands';
 import dotenv from 'dotenv';
 import { getVoiceConnection } from '@discordjs/voice';
-import MusicManager from './music/music_manager';
 import leaveVoice from './voice/leave_voice';
 dotenv.config();
 
@@ -36,7 +35,5 @@ client.on('interactionCreate', async (interaction) => {
 
   await loadedCommands[interaction.commandName].excute(interaction, client);
 });
-
-export const musicManagers = new Map<string, MusicManager>();
 
 client.login(process.env.TOKEN);

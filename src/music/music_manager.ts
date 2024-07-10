@@ -63,3 +63,5 @@ export default class MusicManager {
     return this.playList[this.currentPlayerIndex];
   }
 }
+
+export const musicManagers = new Map<string, MusicManager>();
