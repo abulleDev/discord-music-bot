@@ -2,6 +2,8 @@ import { Client, GatewayIntentBits } from 'discord.js';
 import loadedCommands from './load_commands';
 import dotenv from 'dotenv';
 import { getVoiceConnection } from '@discordjs/voice';
+import MusicManager from './music/music_manager';
+import leaveVoice from './voice/leave_voice';
 dotenv.config();
 
 const client = new Client({
@@ -20,12 +22,12 @@ client.on('voiceStateUpdate', (oldState, newState) => {
   const channel = newState.guild.channels.cache.get(connection.joinConfig.channelId!)!;
   if (channel.isVoiceBased()) {
     const userExist = channel.members.some((member) => !member.user.bot);
-    if (!userExist) return connection.destroy();
+    if (!userExist) return leaveVoice(newState.guild.id, connection);
   }
 
   // Bot has been kicked
   if (newState.id === client.user!.id && newState.channelId === null) {
-    connection.destroy();
+    leaveVoice(newState.guild.id, connection);
   }
 });
 
@@ -34,5 +36,7 @@ client.on('interactionCreate', async (interaction) => {
 
   await loadedCommands[interaction.commandName].excute(interaction, client);
 });
+
+export const musicManagers = new Map<string, MusicManager>();
 
 client.login(process.env.TOKEN);

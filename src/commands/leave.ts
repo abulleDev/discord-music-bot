@@ -1,5 +1,6 @@
 import { getVoiceConnection } from '@discordjs/voice';
 import { Client, CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import leaveVoice from '../voice/leave_voice';
 
 export default {
   data: new SlashCommandBuilder()
@@ -25,7 +26,7 @@ export default {
       return;
     }
 
-    connection.destroy();
+    leaveVoice(interaction.guild.id, connection);
     // Bot successfully leaves the voice channel
     await interaction.reply('Left!');
   },

@@ -1,5 +1,6 @@
-import { getVoiceConnection, joinVoiceChannel } from '@discordjs/voice';
+import { getVoiceConnection } from '@discordjs/voice';
 import { Client, CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import joinVoice from '../voice/join_voice';
 
 export default {
   data: new SlashCommandBuilder()
@@ -24,11 +25,7 @@ export default {
       return;
     }
 
-    const connection = joinVoiceChannel({
-      channelId: voiceChannel.id,
-      guildId: voiceChannel.guild.id,
-      adapterCreator: voiceChannel.guild.voiceAdapterCreator,
-    });
+    joinVoice(voiceChannel);
 
     // Bot successfully joins the voice channel
     await interaction.reply('Joined!');
