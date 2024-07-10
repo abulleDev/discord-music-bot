@@ -54,15 +54,20 @@ export default {
     try {
       const { title, uploader, webpage_url, uploader_url, thumbnail } =
         await getInfo(url);
+
+      const author =
+        uploader === undefined
+          ? null
+          : {
+              name: uploader,
+              url: uploader_url,
+            };
       const embed = new EmbedBuilder()
         .setColor(0xd1d1d1)
         .setTitle(title)
-        .setAuthor({
-          name: uploader,
-          url: uploader_url,
-        })
+        .setAuthor(author)
         .setDescription(webpage_url)
-        .setThumbnail(thumbnail);
+        .setThumbnail(thumbnail ?? null);
       const musicManager = musicManagers.get(interaction.guild!.id);
       musicManager?.addMusic(webpage_url);
       await interaction.editReply({ content: 'Music added.', embeds: [embed] });

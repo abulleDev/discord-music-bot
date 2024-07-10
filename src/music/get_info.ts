@@ -2,10 +2,10 @@ import { spawn } from 'child_process';
 
 interface Info {
   title: string;
-  uploader: string;
+  uploader: string | undefined;
   webpage_url: string;
-  uploader_url: string;
-  thumbnail: string;
+  uploader_url: string | undefined;
+  thumbnail: string | undefined;
 }
 
 export default function getInfo(url: string): Promise<Info> {
