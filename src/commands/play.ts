@@ -64,7 +64,7 @@ export default {
         .setDescription(webpage_url)
         .setThumbnail(thumbnail);
       const musicManager = musicManagers.get(interaction.guild!.id);
-      musicManager?.addMusic(url);
+      musicManager?.addMusic(webpage_url);
       await interaction.editReply({ content: 'Music added.', embeds: [embed] });
     } catch (error) {
       await interaction.editReply('Invalid URL.');
