@@ -10,7 +10,7 @@ interface Info {
 }
 
 export default function getInfo(url: string): Promise<Info> {
-  const ytdlp = spawn('yt-dlp', ['-J', url]);
+  const ytdlp = spawn('yt-dlp', ['--no-playlist', '-J', url]);
   return new Promise((resolve, reject) => {
     ytdlp.stdout.once('data', async (json) => {
       const info: Info | null = JSON.parse(json);
