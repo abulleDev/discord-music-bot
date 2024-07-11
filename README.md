@@ -40,7 +40,7 @@ Download and install yt-dlp for your operating system.
 
 After installation, add yt-dlp to your system's PATH environment variable.
 
-**Important**: What you need is ffmpeg *binary*, **NOT** the Python package of the same name
+**Important**: What you need is yt-dlp *binary*, **NOT** the Python package of the same name
 
 ```bash
 # Check yt-dlp version
