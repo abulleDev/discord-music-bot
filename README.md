@@ -66,6 +66,8 @@ npm install
 
 Create a `.env` file and set your Discord bot token and client id.
 
+You can create your bot and get the token and client ID from the [Discord Developer Portal](https://discord.com/developers/applications).
+
 ```properties
 TOKEN = "YOUR_TOKEN"
 CLIENT_ID = "YOUR_CLIENT_ID"
