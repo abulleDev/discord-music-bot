@@ -28,11 +28,11 @@ const embedColor: { [key: string]: number } = {
 export default {
   data: new SlashCommandBuilder()
     .setName('play')
-    .setDescription('Play YouTube music')
+    .setDescription('Play music')
     .addStringOption((option) => {
       return option
         .setName('url')
-        .setDescription('YouTube URL')
+        .setDescription('Music URL')
         .setRequired(true);
     }),
 
