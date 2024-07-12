@@ -31,8 +31,8 @@ export default {
     .setDescription('Play music')
     .addStringOption((option) => {
       return option
-        .setName('url')
-        .setDescription('Music URL')
+        .setName('music')
+        .setDescription('The title or URL of the music you want to play')
         .setRequired(true);
     }),
 
@@ -66,7 +66,7 @@ export default {
       return;
     }
 
-    const url = interaction.options.get('url')!.value as string;
+    const music = interaction.options.get('music')!.value as string;
     try {
       const {
         title,
@@ -75,7 +75,7 @@ export default {
         uploader_url,
         thumbnail,
         extractor,
-      } = await getInfo(url);
+      } = await getInfo(music);
 
       const author =
         uploader === undefined
@@ -94,7 +94,9 @@ export default {
       musicManager?.addMusic(webpage_url);
       await interaction.editReply({ content: 'Music added.', embeds: [embed] });
     } catch (error) {
-      await interaction.editReply('Invalid URL.');
+      if (error instanceof Error) {
+        await interaction.editReply(error.message);
+      }
     }
   },
 };
