@@ -29,7 +29,15 @@ export function getInfo(url: string): Promise<VideoInfo> {
 
       // Check url validity
       if (info === null) reject(new Error('Invalid URL.'));
-      else resolve(info);
+      else
+        resolve({
+          title: info.title,
+          uploader: info.uploader,
+          webpage_url: info.webpage_url,
+          uploader_url: info.uploader_url,
+          thumbnail: info.thumbnail,
+          extractor: info.extractor,
+        });
     });
   });
 }
@@ -52,7 +60,17 @@ export function getSearchInfo(music: string): Promise<VideoInfo> {
 
       // Check search results existence
       if (searchInfo === null) reject(new Error('No search results found.'));
-      else resolve(searchInfo.entries[0]);
+      else {
+        const videoInfo = searchInfo.entries[0];
+        resolve({
+          title: videoInfo.title,
+          uploader: videoInfo.uploader,
+          webpage_url: videoInfo.webpage_url,
+          uploader_url: videoInfo.uploader_url,
+          thumbnail: videoInfo.thumbnail,
+          extractor: videoInfo.extractor,
+        });
+      }
     });
   });
 }
