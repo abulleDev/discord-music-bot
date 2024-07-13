@@ -18,10 +18,14 @@ interface SearchInfo {
 }
 
 export function getInfo(url: string): Promise<VideoInfo> {
+  let jsonString = '';
   const ytdlp = spawn('yt-dlp', ['--no-playlist', '-J', url]);
+  ytdlp.stdout.on('data', (data) => {
+    jsonString += data;
+  });
   return new Promise((resolve, reject) => {
-    ytdlp.stdout.once('data', (json) => {
-      const info: VideoInfo | null = JSON.parse(json);
+    ytdlp.stdout.once('close', () => {
+      const info: VideoInfo | null = JSON.parse(jsonString);
 
       // Check url validity
       if (info === null) reject(new Error('Invalid URL.'));
@@ -31,6 +35,7 @@ export function getInfo(url: string): Promise<VideoInfo> {
 }
 
 export function getSearchInfo(music: string): Promise<VideoInfo> {
+  let jsonString = '';
   const ytdlp = spawn('yt-dlp', [
     '--no-playlist',
     '-J',
@@ -38,9 +43,12 @@ export function getSearchInfo(music: string): Promise<VideoInfo> {
     'ytsearch',
     music,
   ]);
+  ytdlp.stdout.on('data', (data) => {
+    jsonString += data;
+  });
   return new Promise((resolve, reject) => {
-    ytdlp.stdout.once('data', (json) => {
-      const searchInfo: SearchInfo | null = JSON.parse(json);
+    ytdlp.stdout.once('close', () => {
+      const searchInfo: SearchInfo | null = JSON.parse(jsonString);
 
       // Check search results existence
       if (searchInfo === null) reject(new Error('No search results found.'));
