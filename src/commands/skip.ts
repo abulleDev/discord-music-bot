@@ -6,7 +6,7 @@ import {
   SlashCommandBuilder,
 } from 'discord.js';
 import { musicManagers } from '../music/music_manager';
-import getInfo from '../music/get_info';
+import { getInfo } from '../music/get_info';
 
 export default {
   data: new SlashCommandBuilder()

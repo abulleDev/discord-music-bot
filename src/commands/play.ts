@@ -7,7 +7,16 @@ import {
 } from 'discord.js';
 import joinVoice from '../voice/join_voice';
 import { musicManagers } from '../music/music_manager';
-import getInfo from '../music/get_info';
+import { getInfo, getSearchInfo } from '../music/get_info';
+
+function isURL(url: string) {
+  try {
+    new URL(url);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
 
 const embedColor: { [key: string]: number } = {
   youtube: 0xff0000,
@@ -68,6 +77,9 @@ export default {
 
     const music = interaction.options.get('music')!.value as string;
     try {
+      const info = isURL(music)
+        ? await getInfo(music)
+        : await getSearchInfo(music);
       const {
         title,
         uploader,
@@ -75,7 +87,7 @@ export default {
         uploader_url,
         thumbnail,
         extractor,
-      } = await getInfo(music);
+      } = info;
 
       const author =
         uploader === undefined
