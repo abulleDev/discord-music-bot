@@ -5,10 +5,11 @@ import {
   createAudioResource,
 } from '@discordjs/voice';
 import { spawn } from 'child_process';
+import { VideoInfo } from './get_info';
 
 export default class MusicManager {
   private readonly player: AudioPlayer = createAudioPlayer();
-  private readonly playList: string[] = [];
+  private readonly playList: VideoInfo[] = [];
   private currentPlayerIndex = 0;
   private isPlaying = false;
 
@@ -32,7 +33,7 @@ export default class MusicManager {
         '-',
         '-f',
         'bestaudio',
-        this.playList[this.currentPlayerIndex],
+        this.playList[this.currentPlayerIndex].webpage_url,
       ]).stdout;
       const resource = createAudioResource(stream);
       this.player.play(resource);
@@ -50,8 +51,8 @@ export default class MusicManager {
     return this.isPlaying;
   }
 
-  public addMusic(url: string) {
-    this.playList.push(url);
+  public addMusic(music: VideoInfo) {
+    this.playList.push(music);
     if (this.isPlaying === false) this.playMusic();
   }
 

@@ -103,7 +103,7 @@ export default {
         .setDescription(webpage_url)
         .setThumbnail(thumbnail ?? null);
       const musicManager = musicManagers.get(interaction.guild!.id);
-      musicManager?.addMusic(webpage_url);
+      musicManager?.addMusic(info);
       await interaction.editReply({ content: 'Music added.', embeds: [embed] });
     } catch (error) {
       if (error instanceof Error) {

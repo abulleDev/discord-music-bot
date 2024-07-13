@@ -1,6 +1,6 @@
 import { spawn } from 'child_process';
 
-interface VideoInfo {
+export interface VideoInfo {
   id?: string;
   title: string;
   description?: string;

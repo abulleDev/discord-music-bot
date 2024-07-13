@@ -6,7 +6,6 @@ import {
   SlashCommandBuilder,
 } from 'discord.js';
 import { musicManagers } from '../music/music_manager';
-import { getInfo } from '../music/get_info';
 
 export default {
   data: new SlashCommandBuilder()
@@ -53,7 +52,7 @@ export default {
 
     const currentMusic = musicManager?.currentMusic();
     musicManager?.skipMusic();
-    const { title, webpage_url } = await getInfo(currentMusic!);
+    const { title, webpage_url } = currentMusic!;
     const embed = new EmbedBuilder()
       .setColor(0xd1d1d1)
       .setTitle('Music skipped.')
