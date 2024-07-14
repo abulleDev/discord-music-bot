@@ -1,76 +1,40 @@
 import { spawn } from 'child_process';
 
 export interface VideoInfo {
-  id?: string;
+  id: string | null;
   title: string;
-  description?: string;
-  uploader?: string;
+  description: string | null;
+  uploader: string | null;
   webpage_url: string;
-  uploader_url?: string;
-  thumbnail?: string;
+  uploader_url: string | null;
+  thumbnail: string | null;
   extractor: string;
-  [key: string]: any;
 }
 
-interface SearchInfo {
-  entries: VideoInfo[];
-  [key: string]: any;
-}
-
-export function getInfo(url: string): Promise<VideoInfo> {
-  let jsonString = '';
-  const ytdlp = spawn('yt-dlp', ['--no-playlist', '-J', url]);
-  ytdlp.stdout.on('data', (data) => {
-    jsonString += data;
-  });
-  return new Promise((resolve, reject) => {
-    ytdlp.stdout.once('close', () => {
-      const info: VideoInfo | null = JSON.parse(jsonString);
-
-      // Check url validity
-      if (info === null) reject(new Error('Invalid URL.'));
-      else
-        resolve({
-          title: info.title,
-          uploader: info.uploader,
-          webpage_url: info.webpage_url,
-          uploader_url: info.uploader_url,
-          thumbnail: info.thumbnail,
-          extractor: info.extractor,
-        });
-    });
-  });
-}
-
-export function getSearchInfo(music: string): Promise<VideoInfo> {
-  let jsonString = '';
+export default function getInfo(music: string): Promise<VideoInfo> {
   const ytdlp = spawn('yt-dlp', [
+    '--skip-download',
     '--no-playlist',
-    '-J',
+    '--output-na-placeholder',
+    'null',
+    '--print',
+    '{"id":%(id)j, "title":%(title)j, "description":%(description)j, "uploader":%(uploader)j, "webpage_url":%(webpage_url)j, "uploader_url":%(uploader_url)j, "thumbnail":%(thumbnail)j, "extractor":%(extractor)j}',
     '--default-search',
     'ytsearch',
     music,
   ]);
-  ytdlp.stdout.on('data', (data) => {
-    jsonString += data;
-  });
   return new Promise((resolve, reject) => {
-    ytdlp.stdout.once('close', () => {
-      const searchInfo: SearchInfo | null = JSON.parse(jsonString);
-
-      // Check search results existence
-      if (searchInfo === null) reject(new Error('No search results found.'));
-      else {
-        const videoInfo = searchInfo.entries[0];
-        resolve({
-          title: videoInfo.title,
-          uploader: videoInfo.uploader,
-          webpage_url: videoInfo.webpage_url,
-          uploader_url: videoInfo.uploader_url,
-          thumbnail: videoInfo.thumbnail,
-          extractor: videoInfo.extractor,
-        });
+    ytdlp.stdout.once('data', (data) => {
+      try {
+        const info: VideoInfo = JSON.parse(data);
+        resolve(info);
+      } catch (error) {
+        reject(new Error('No results found.'));
       }
+    });
+    ytdlp.once('close', () => {
+      // No data resolved until process termination
+      reject(new Error('No results found.'));
     });
   });
 }
