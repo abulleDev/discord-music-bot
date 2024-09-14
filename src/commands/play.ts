@@ -1,6 +1,5 @@
 import { getVoiceConnection } from '@discordjs/voice';
 import {
-  Client,
   CommandInteraction,
   EmbedBuilder,
   SlashCommandBuilder,
@@ -36,7 +35,7 @@ export default {
         .setRequired(true);
     }),
 
-  async excute(interaction: CommandInteraction, client: Client) {
+  async excute(interaction: CommandInteraction) {
     if (interaction.guild === null) return;
 
     // defer reply (need longer than three seconds)

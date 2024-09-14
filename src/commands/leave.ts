@@ -1,5 +1,5 @@
 import { getVoiceConnection } from '@discordjs/voice';
-import { Client, CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
 import leaveVoice from '../voice/leave_voice';
 
 export default {
@@ -7,7 +7,7 @@ export default {
     .setName('leave')
     .setDescription('Leave voice channel'),
 
-  async excute(interaction: CommandInteraction, client: Client) {
+  async excute(interaction: CommandInteraction) {
     if (interaction.guild === null) return;
 
     const guild = interaction.guild;
