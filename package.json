@@ -10,14 +10,14 @@
     "register": "ts-node ./src/bot/register_slash_commands.ts"
   },
   "dependencies": {
-    "@discordjs/voice": "^0.17.0",
-    "discord.js": "^14.15.3",
-    "dotenv": "^16.4.5",
-    "libsodium-wrappers": "^0.7.13"
+    "@discordjs/voice": "^0.18.0",
+    "discord.js": "^14.18.0",
+    "dotenv": "^16.4.7",
+    "libsodium-wrappers": "^0.7.15"
   },
   "devDependencies": {
-    "@types/node": "^20.14.8",
+    "@types/node": "^22.13.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.7.3"
   }
 }
