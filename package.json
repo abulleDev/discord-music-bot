@@ -4,19 +4,29 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "ts-node ./src/bot/app.ts",
-    "build": "tsc",
+    "dev": "vite build && ts-node ./src/bot/app.ts",
+    "build": "vite build && tsc",
     "start": "node ./dist/bot/app.js",
     "register": "ts-node ./src/bot/register_slash_commands.ts"
   },
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "discord.js": "^14.18.0",
     "dotenv": "^16.4.7",
-    "libsodium-wrappers": "^0.7.15"
+    "express": "^4.21.2",
+    "libsodium-wrappers": "^0.7.15",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "vite": "^6.1.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "@types/node": "^22.13.1",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }

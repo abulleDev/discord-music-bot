@@ -3,6 +3,7 @@ import loadedCommands from './load_commands';
 import dotenv from 'dotenv';
 import { getVoiceConnection } from '@discordjs/voice';
 import leaveVoice from './voice/leave_voice';
+import startServer from '../server/server';
 dotenv.config();
 
 const client = new Client({
@@ -37,3 +38,5 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 client.login(process.env.TOKEN);
+
+startServer();
