@@ -4,10 +4,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "ts-node ./src/app.ts",
+    "dev": "ts-node ./src/bot/app.ts",
     "build": "tsc",
-    "start": "node ./dist/app.js",
-    "register": "ts-node ./src/register_slash_commands.ts"
+    "start": "node ./dist/bot/app.js",
+    "register": "ts-node ./src/bot/register_slash_commands.ts"
   },
   "dependencies": {
     "@discordjs/voice": "^0.17.0",
