@@ -1,14 +1,18 @@
-import { REST, Routes, SharedSlashCommand } from 'discord.js';
+import {
+  REST,
+  RESTPostAPIChatInputApplicationCommandsJSONBody,
+  Routes,
+} from 'discord.js';
 import loadedCommands from './load_commands';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const commands: SharedSlashCommand[] = [];
+const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
 for (const commandName in loadedCommands) {
-  commands.push(loadedCommands[commandName].data);
+  commands.push(loadedCommands[commandName].data.toJSON());
 }
 
-const rest = new REST({ version: '10' }).setToken(process.env.TOKEN!);
+const rest = new REST().setToken(process.env.TOKEN!);
 
 (async function () {
   try {
