@@ -8,8 +8,9 @@ import {
 import joinVoice from '../voice/join_voice';
 import { musicManagers } from '../music/music_manager';
 import getInfo from '../music/get_info';
+import type { Command } from '../types';
 
-const embedColor: { [key: string]: number } = {
+const embedColor: Record<string, number> = {
   youtube: 0xff0000,
   soundcloud: 0xff5500,
   'chzzk:video': 0x00ffa3,
@@ -25,16 +26,26 @@ const embedColor: { [key: string]: number } = {
   vimeo: 0x17d5ff,
 };
 
+const a = new SlashCommandBuilder()
+  .setName('play')
+  .setDescription('Play music')
+  .addStringOption((option) =>
+    option
+      .setName('music')
+      .setDescription('The title or URL of the music you want to play')
+      .setRequired(true),
+  );
+
 export default {
   data: new SlashCommandBuilder()
     .setName('play')
     .setDescription('Play music')
-    .addStringOption((option) => {
-      return option
+    .addStringOption((option) =>
+      option
         .setName('music')
         .setDescription('The title or URL of the music you want to play')
-        .setRequired(true);
-    }),
+        .setRequired(true),
+    ),
 
   async excute(interaction: ChatInputCommandInteraction<CacheType>) {
     if (interaction.guild === null) return;
@@ -100,4 +111,4 @@ export default {
       }
     }
   },
-};
+} satisfies Command;

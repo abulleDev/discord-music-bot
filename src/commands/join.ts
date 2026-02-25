@@ -5,6 +5,7 @@ import {
   SlashCommandBuilder,
 } from 'discord.js';
 import joinVoice from '../voice/join_voice';
+import type { Command } from '../types';
 
 export default {
   data: new SlashCommandBuilder()
@@ -34,4 +35,4 @@ export default {
     // Bot successfully joins the voice channel
     await interaction.reply('Joined!');
   },
-};
+} satisfies Command;

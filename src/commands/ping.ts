@@ -3,6 +3,7 @@ import {
   ChatInputCommandInteraction,
   SlashCommandBuilder,
 } from 'discord.js';
+import type { Command } from '../types';
 
 export default {
   data: new SlashCommandBuilder()
@@ -12,4 +13,4 @@ export default {
   async excute(interaction: ChatInputCommandInteraction<CacheType>) {
     await interaction.reply('Pong!');
   },
-};
+} satisfies Command;

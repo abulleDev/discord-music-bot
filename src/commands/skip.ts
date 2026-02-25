@@ -6,6 +6,7 @@ import {
   SlashCommandBuilder,
 } from 'discord.js';
 import { musicManagers } from '../music/music_manager';
+import type { Command } from '../types';
 
 export default {
   data: new SlashCommandBuilder()
@@ -59,4 +60,4 @@ export default {
       .setDescription(`**${title}**: ${webpage_url}.`);
     await interaction.editReply({ embeds: [embed] });
   },
-};
+} satisfies Command;

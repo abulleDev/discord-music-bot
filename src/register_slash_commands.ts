@@ -1,9 +1,9 @@
-import { REST, Routes, SlashCommandBuilder } from 'discord.js';
+import { REST, Routes, SharedSlashCommand } from 'discord.js';
 import loadedCommands from './load_commands';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const commands: SlashCommandBuilder[] = [];
+const commands: SharedSlashCommand[] = [];
 for (const commandName in loadedCommands) {
   commands.push(loadedCommands[commandName].data);
 }

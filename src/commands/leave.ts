@@ -5,6 +5,7 @@ import {
   SlashCommandBuilder,
 } from 'discord.js';
 import leaveVoice from '../voice/leave_voice';
+import type { Command } from '../types';
 
 export default {
   data: new SlashCommandBuilder()
@@ -36,4 +37,4 @@ export default {
     // Bot successfully leaves the voice channel
     await interaction.reply('Left!');
   },
-};
+} satisfies Command;
