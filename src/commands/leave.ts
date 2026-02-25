@@ -1,5 +1,9 @@
 import { getVoiceConnection } from '@discordjs/voice';
-import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import {
+  CacheType,
+  ChatInputCommandInteraction,
+  SlashCommandBuilder,
+} from 'discord.js';
 import leaveVoice from '../voice/leave_voice';
 
 export default {
@@ -7,7 +11,7 @@ export default {
     .setName('leave')
     .setDescription('Leave voice channel'),
 
-  async excute(interaction: CommandInteraction) {
+  async excute(interaction: ChatInputCommandInteraction<CacheType>) {
     if (interaction.guild === null) return;
 
     const guild = interaction.guild;
@@ -22,7 +26,9 @@ export default {
     }
     // User is not in the same voice channel as the bot
     else if (voiceChannel?.id !== connection.joinConfig.channelId) {
-      await interaction.reply('You need to be in the same voice channel as the bot to use this command!');
+      await interaction.reply(
+        'You need to be in the same voice channel as the bot to use this command!',
+      );
       return;
     }
 

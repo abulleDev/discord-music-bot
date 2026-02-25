@@ -1,10 +1,18 @@
-import { Client, CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import {
+  CacheType,
+  ChatInputCommandInteraction,
+  Client,
+  SlashCommandBuilder,
+} from 'discord.js';
 import { readdirSync } from 'fs';
 import path from 'path';
 
 type Command = {
   data: SlashCommandBuilder;
-  excute: (interaction: CommandInteraction, client: Client) => Promise<void>;
+  excute: (
+    interaction: ChatInputCommandInteraction<CacheType>,
+    client: Client,
+  ) => Promise<void>;
 };
 
 console.log('Loading commands...');
@@ -12,7 +20,8 @@ console.log('Loading commands...');
 const loadedCommands: { [key in string]: Command } = {};
 const commandPath = path.join(__dirname, './commands/');
 for (const commandFile of readdirSync(commandPath)) {
-  const command = require(path.join(commandPath, commandFile)).default as Command;
+  const command = require(path.join(commandPath, commandFile))
+    .default as Command;
   loadedCommands[command.data.name] = command;
 }
 

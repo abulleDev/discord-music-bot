@@ -1,5 +1,9 @@
 import { getVoiceConnection } from '@discordjs/voice';
-import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import {
+  CacheType,
+  ChatInputCommandInteraction,
+  SlashCommandBuilder,
+} from 'discord.js';
 import joinVoice from '../voice/join_voice';
 
 export default {
@@ -7,7 +11,7 @@ export default {
     .setName('join')
     .setDescription('Join the voice channel'),
 
-  async excute(interaction: CommandInteraction) {
+  async excute(interaction: ChatInputCommandInteraction<CacheType>) {
     if (interaction.guild === null) return;
 
     const guild = interaction.guild;

@@ -6,7 +6,7 @@ This project is a bot designed for use on Discord servers. The bot plays music w
 
 To use this Discord bot, you will need the following programs:
 
-1. [**Node.js 16+**](https://nodejs.org) - Node.js is a JavaScript runtime.
+1. [**Node.js 22+**](https://nodejs.org) - Node.js is a JavaScript runtime.
 
 2. [**FFmpeg**](https://ffmpeg.org/download.html) - FFmpeg is a multimedia framework for handling audio and video files.
 
@@ -16,7 +16,7 @@ To use this Discord bot, you will need the following programs:
 
 ### 1. Install Node.js
 
-Download and install Node.js 16 or higher.
+Download and install Node.js 22 or higher.
 
 ```bash
 # Check Node.js version
@@ -40,7 +40,7 @@ Download and install yt-dlp for your operating system.
 
 After installation, add yt-dlp to your system's PATH environment variable.
 
-**Important**: What you need is yt-dlp *binary*, **NOT** the Python package of the same name
+**Important**: What you need is yt-dlp _binary_, **NOT** the Python package of the same name
 
 ```bash
 # Check yt-dlp version

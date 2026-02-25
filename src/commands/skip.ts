@@ -1,6 +1,7 @@
 import { getVoiceConnection } from '@discordjs/voice';
 import {
-  CommandInteraction,
+  CacheType,
+  ChatInputCommandInteraction,
   EmbedBuilder,
   SlashCommandBuilder,
 } from 'discord.js';
@@ -11,7 +12,7 @@ export default {
     .setName('skip')
     .setDescription('Skip current music'),
 
-  async excute(interaction: CommandInteraction) {
+  async excute(interaction: ChatInputCommandInteraction<CacheType>) {
     if (interaction.guild === null) return;
 
     // defer reply (need longer than three seconds)
@@ -37,7 +38,7 @@ export default {
     // User is not in the same voice channel as the bot
     if (voiceChannel?.id !== connection.joinConfig.channelId) {
       await interaction.editReply(
-        'You need to be in the same voice channel as the bot to use this command!'
+        'You need to be in the same voice channel as the bot to use this command!',
       );
       return;
     }
